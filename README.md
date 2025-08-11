@@ -1,57 +1,61 @@
-Flight Deal Tracker App ✈️💸
-Overview
-A Python-based automation tool that monitors flight prices for specified destinations and alerts users when ticket prices drop below a defined threshold.
-Built as part of the 100 Days of Code – Python Pro Bootcamp course, this project combines API integration, data management, and automated notifications to deliver real-time flight deal tracking.
+Flight Deal Tracker
+A Python application that tracks flight prices for various destinations and identifies cheaper flight deals compared to stored lowest prices.
 
 Features
-Price Monitoring: Continuously checks flight prices using the Kiwi Tequila API.
+Fetches destination data (cities, prices, IATA codes) from a Google Sheet via the Sheety API.
 
-Google Sheets Integration: Stores and updates flight search data using the Sheety API for easy editing and tracking.
+Automatically fills missing IATA codes by querying flight data APIs.
 
-User Notifications: Sends alerts via email/SMS when flight prices fall below the target value.
+Searches for the cheapest flights from a specified origin city to multiple destinations within a 6-month timeframe.
 
-Dynamic Search: Automatically updates IATA codes for destinations and retrieves the cheapest flights available.
+Compares current flight prices with stored lowest prices and highlights price drops.
 
-Customizable: Users can set preferred destinations and budget limits directly in Google Sheets.
+Project Setup and Workflow
+Google Sheet Setup
+Created a Google Sheet with destination cities and their respective lowest acceptable prices.
+Connected the sheet to the project via the Sheety API for easy data retrieval and updates.
 
-Tech Stack & Tools
-Language: Python
+DataManager Module
+Fetches destination data from Sheety API.
+Updates the Google Sheet with missing IATA airport codes after retrieving them.
 
-APIs:
+Flight Search Module
+Connects to the Amadeus flight search API.
+Retrieves flight offers based on origin, destination, and date range.
+Parses flight offers to find the cheapest available flight.
 
-Tequila API (Kiwi) – Flight search and pricing data
+Main Application Flow
+Loads destination data from Sheety.
+Updates missing IATA codes.
+Searches for flights over the next 6 months from origin city (default: London).
+Checks if the current lowest flight price beats stored lowest prices.
+Prints lower-priced flight details to console when found.
 
-Sheety API – Google Sheets integration
+Prerequisites
+Python 3.7 or higher
 
-Twilio API / SMTP – SMS/Email alerts
+.env file containing:
 
-Libraries: requests, datetime, smtplib, twilio
+SHEETY_USERNAME and SHEETY_PASSWORD
 
-Data Storage: Google Sheets (via Sheety API)
+AMADEUS_API_KEY and AMADEUS_SECRET
 
-How It Works
-Destination Setup: Add your preferred cities and price limits to the linked Google Sheet.
+How to Run
+Clone the repository.
 
-IATA Code Fetching: The app retrieves IATA airport codes for your destinations if not already set.
+Install dependencies:
 
-Flight Search: Checks for the cheapest flights from your origin city to each listed destination.
+bash
+Copy code
+pip install -r requirements.txt
+Create a .env file with the required API credentials.
 
-Alerts: If a price is lower than your threshold, sends an email/SMS with trip details and booking link.
+Run the main script:
 
-Learning Outcomes
-API integration and authentication
+bash
+Copy code
+python main.py
+Notes
+Make sure your Google Sheet is correctly set up and accessible via Sheety.
 
-Data retrieval and JSON parsing
-
-Working with external services like Google Sheets & Twilio
-
-Automating workflows using Python
-
-Sending automated alerts via email and SMS
-
-Future Improvements
-Deploy on AWS Lambda or EC2 for continuous background execution
-
-Add a web-based dashboard for real-time flight tracking
-
-Support for multiple origin airports and date ranges
+API request rates are throttled with delays to avoid rate limiting.
