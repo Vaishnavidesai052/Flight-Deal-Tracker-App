@@ -1,71 +1,47 @@
 ✈️ Flight Deal Tracker
-A Python application that tracks flight prices for various destinations and helps identify cheaper flight deals compared to stored lowest prices.
+A Python application that tracks flight prices for destinations and alerts you when cheaper deals are found.
 
 🚀 Features
-📋 Fetches destination data (cities, prices, IATA codes) from a Google Sheet via the Sheety API.
+📋 Fetches destination data from Google Sheet via Sheety API
 
-✈️ Automatically fills missing IATA codes by querying flight data APIs.
+🛫 Fills missing IATA codes using flight data APIs
 
-🔍 Searches for the cheapest flights from a specified origin city to multiple destinations within a 6-month timeframe.
+🔍 Searches for the cheapest flights from a specified origin city over 6 months
 
-💸 Compares current flight prices with stored lowest prices and highlights price drops.
+💸 Compares prices with stored lowest prices and highlights price drops
 
-🛠️ Project Setup and Workflow
-🗂 Google Sheet Setup
+📄 Google Sheet & Form
+Create a Google Sheet with columns: City, IATA Code, Lowest Price
+Link it to this Google Form for easy data entry:
+📝 Fill the Google Form
 
-Created a Google Sheet with destination cities and their respective lowest acceptable prices.
+🧩 Modules
+📊 DataManager – Fetches data and updates missing IATA codes
 
-Connected the sheet to the project via the Sheety API for easy data retrieval and updates.
+🛩 Flight Search – Uses Amadeus API to find cheapest flights
 
-📊 DataManager Module
-
-Fetches destination data from Sheety API.
-
-Updates the Google Sheet with missing IATA airport codes after retrieving them.
-
-🔎 Flight Search Module
-
-Connects to the Amadeus flight search API.
-
-Retrieves flight offers based on origin, destination, and date range.
-
-Parses flight offers to find the cheapest available flight.
-
-🧩 Main Application Flow
-
-Loads destination data from Sheety.
-
-Updates missing IATA codes.
-
-Searches for flights over the next 6 months from origin city (default: London).
-
-Checks if the current lowest flight price beats stored lowest prices.
-
-Prints lower-priced flight details to console when found.
-
-⚙️ Prerequisites
-Python 3.7 or higher
+⚙️ Requirements
+🐍 Python 3.7+
 
 .env file containing:
 
-SHEETY_USERNAME and SHEETY_PASSWORD
+SHEETY_USERNAME, SHEETY_PASSWORD
 
-AMADEUS_API_KEY and AMADEUS_SECRET
+AMADEUS_API_KEY, AMADEUS_SECRET
 
 ▶️ How to Run
-Clone the repository.
+📥 Clone the repository
 
-Install dependencies:
+📦 Install dependencies:
 
 bash
-Copy
-Edit
+Copy code
 pip install -r requirements.txt
-Create a .env file with the required API credentials.
+🛠 Create .env with credentials
 
-Run the main script:
+🏃 Run:
 
 bash
-Copy
-Edit
+Copy code
 python main.py
+If you want, I can also make 
